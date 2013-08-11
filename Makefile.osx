@@ -1,0 +1,14 @@
+all: genetic
+
+ARCHS = -arch i386 -arch ppc -isysroot /Developer/SDKs/MacOSX10.4u.sdk/
+CFLAGS=-O3 -I/Library/Frameworks/SDL.framework/Headers/ $(ARCHS)
+CXXFLAGS=$(CFLAGS)
+LDFLAGS=-framework SDL -framework Cocoa $(ARCHS)
+OBJECTS=genetic.o serializer.o streamer.o image.o SDLMain.o
+
+genetic: $(OBJECTS) point.h
+	g++ -o $@ $(CXXFLAGS) $(OBJECTS) $(LDFLAGS)
+
+clean:
+	rm -f genetic $(OBJECTS)
+	 
